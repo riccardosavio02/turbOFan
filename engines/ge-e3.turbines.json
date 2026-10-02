@@ -1,0 +1,919 @@
+{
+ "$comment": "Turbine HP e LP del GE E3. I report non tabulano le sezioni delle pale: la geometria è ricostruita da (1) condotto quotato/digitalizzato, (2) numero di pale, (3) angoli di flusso, (4) solidità e allungamento. Angoli FISICI in gradi dall'asse. Statori: 'in' = swirl d'ingresso (positivo contro la rotazione, è lo swirl d'uscita dello stadio precedente), 'out' = angolo d'uscita (positivo nel verso di rotazione). Rotori: 'in' = angolo relativo d'ingresso (positivo nel verso di rotazione), 'out' = angolo relativo d'uscita (positivo contro la rotazione). Colonne angles: [span, in, out, tm_c]. Coordinate [Z, R] in cm nel riferimento di ciascun report.",
+ "hpt": {
+  "src": "NASA CR-167955 (HPT detailed design). Condotto: Fig.3 p.9 (raggi quotati, posizioni assiali digitalizzate ±0.2 cm). Numero di palette/pale: Tab.III/IV pp.10-12. Angoli: Fig.5 p.13 (letture approssimate) + coerenza con Tab.III (swirl stadio 1 = 16°). Spessori: stima.",
+  "placement_cm": {
+   "v": 213.1,
+   "src": "CR-169301 Fig.1 scalata su prediffusore (Fig.90) e raggi HPT: vedi ge-e3.combustor.json figure1_scale. Stima precedente (CR-168219 Fig.22): 217.2."
+  },
+  "tip_speed_takeoff_m_s": {
+   "stage1": 513.9,
+   "stage2": 535.2,
+   "src": "CR-167955 Tab.III"
+  },
+  "table4": {
+   "S1": {
+    "N": 46,
+    "AW_over_t": 0.71,
+    "AR": 3.3
+   },
+   "S2": {
+    "N": 48,
+    "AW_over_t": 1.07,
+    "AR": 4.4
+   },
+   "R1": {
+    "N": 76,
+    "AW_over_t": 0.96,
+    "AR": 3.8
+   },
+   "R2": {
+    "N": 70,
+    "AW_over_t": 1.06,
+    "AR": 4.6
+   },
+   "src": "CR-167955 Tab.IV p.12"
+  },
+  "blade_rows": [
+   {
+    "name": "S1",
+    "type": "stator",
+    "count": 46,
+    "stations": {
+     "tip_LE": [
+      0.0,
+      37.33
+     ],
+     "hub_LE": [
+      0.0,
+      31.73
+     ],
+     "tip_TE": [
+      3.37,
+      36.58
+     ],
+     "hub_TE": [
+      3.37,
+      32.58
+     ]
+    },
+    "material": "MA754 ODS + barriera termica",
+    "cooled": true,
+    "angles": [
+     [
+      0,
+      0,
+      76,
+      0.22
+     ],
+     [
+      0.5,
+      0,
+      75,
+      0.22
+     ],
+     [
+      1,
+      0,
+      74,
+      0.22
+     ]
+    ]
+   },
+   {
+    "name": "R1",
+    "type": "rotor",
+    "count": 76,
+    "stations": {
+     "tip_LE": [
+      4.59,
+      36.6
+     ],
+     "hub_LE": [
+      4.59,
+      32.58
+     ],
+     "tip_TE": [
+      7.56,
+      36.6
+     ],
+     "hub_TE": [
+      7.56,
+      32.33
+     ]
+    },
+    "material": "superlega N4 monocristallo + barriera termica",
+    "cooled": true,
+    "angles": [
+     [
+      0,
+      40,
+      64,
+      0.24
+     ],
+     [
+      0.5,
+      45,
+      66,
+      0.18
+     ],
+     [
+      1,
+      38,
+      66,
+      0.12
+     ]
+    ]
+   },
+   {
+    "name": "S2",
+    "type": "stator",
+    "count": 48,
+    "stations": {
+     "tip_LE": [
+      10.07,
+      37.43
+     ],
+     "hub_LE": [
+      10.46,
+      32.17
+     ],
+     "tip_TE": [
+      15.15,
+      38.05
+     ],
+     "hub_TE": [
+      15.1,
+      31.22
+     ]
+    },
+    "material": "superlega N4 + barriera termica",
+    "cooled": true,
+    "angles": [
+     [
+      0,
+      14,
+      70,
+      0.18
+     ],
+     [
+      0.5,
+      16,
+      69,
+      0.18
+     ],
+     [
+      1,
+      18,
+      69,
+      0.18
+     ]
+    ]
+   },
+   {
+    "name": "R2",
+    "type": "rotor",
+    "count": 70,
+    "stations": {
+     "tip_LE": [
+      16.57,
+      38.08
+     ],
+     "hub_LE": [
+      16.57,
+      31.2
+     ],
+     "tip_TE": [
+      19.47,
+      38.1
+     ],
+     "hub_TE": [
+      19.87,
+      31.12
+     ]
+    },
+    "material": "eutettico solidificato direzionalmente (non raffreddata)",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      15,
+      60,
+      0.2
+     ],
+     [
+      0.5,
+      15,
+      60,
+      0.14
+     ],
+     [
+      1,
+      15,
+      60,
+      0.09
+     ]
+    ]
+   }
+  ]
+ },
+ "lpt": {
+  "src": "LPT Test Hardware Detailed Design Report (NTRS 19850002686). Condotto: Fig.8 p.15 (pollici, digitalizzato ±0.15 in). Numero di pale: Fig.6 p.12 (Block II). Larghezze assiali: Tab.III p.17 (media di AW/t e h/AW). Angoli: Tab.II p.16 (Block II, mozzo/metà/apice). Spessori: stima.",
+  "placement_cm": {
+   "v": 228.02,
+   "src": "Piano d'uscita HPT (213.1 + 20.0 - 5.08 cm): nella Fig.8 il condotto è piatto da x=-2 a x=0 in con i raggi d'uscita HPT (mozzo 12.25 in = 31.12 cm, apice 15.0 in = 38.10 cm, CR-167955 Fig.3); con x=0 in sul piano d'uscita HPT il condotto di transizione fino alla paletta 1 misura 7.2 cm, contro 7.62 cm (3 in) di CR-168219 p.82. Le stazioni sono in cm da x=-2 in.",
+   "x_origin_in": -2.0,
+   "hpt_exit_at_x_in": 0.0
+  },
+  "table2": {
+   "1": {
+    "a": [
+     53.7,
+     61.0,
+     60.0
+    ],
+    "b1": [
+     43.0,
+     47.9,
+     35.7
+    ],
+    "b2": [
+     55.6,
+     61.3,
+     60.0
+    ],
+    "sw": [
+     41.2,
+     47.6,
+     37.0
+    ]
+   },
+   "2": {
+    "a": [
+     55.8,
+     64.1,
+     62.9
+    ],
+    "b1": [
+     44.5,
+     49.3,
+     37.0
+    ],
+    "b2": [
+     55.8,
+     63.8,
+     62.8
+    ],
+    "sw": [
+     40.0,
+     49.1,
+     36.8
+    ]
+   },
+   "3": {
+    "a": [
+     56.3,
+     64.8,
+     63.7
+    ],
+    "b1": [
+     44.7,
+     47.8,
+     31.1
+    ],
+    "b2": [
+     55.7,
+     63.8,
+     62.7
+    ],
+    "sw": [
+     39.7,
+     47.7,
+     31.0
+    ]
+   },
+   "4": {
+    "a": [
+     56.2,
+     62.3,
+     59.7
+    ],
+    "b1": [
+     44.3,
+     40.0,
+     10.0
+    ],
+    "b2": [
+     55.4,
+     60.5,
+     58.2
+    ],
+    "sw": [
+     36.5,
+     37.0,
+     16.5
+    ]
+   },
+   "5": {
+    "a": [
+     55.4,
+     56.0,
+     48.5
+    ],
+    "b1": [
+     40.5,
+     24.2,
+     -8.0
+    ],
+    "b2": [
+     48.5,
+     50.0,
+     48.4
+    ],
+    "sw": [
+     20.0,
+     12.5,
+     3.0
+    ]
+   }
+  },
+  "table2_stage": {
+   "dh_btu_lbm": [
+    31.4,
+    34.0,
+    35.3,
+    30.2,
+    21.2
+   ],
+   "PR": [
+    1.3,
+    1.33,
+    1.4,
+    1.36,
+    1.26
+   ],
+   "loading_dh_2u2": [
+    1.71,
+    1.58,
+    1.43,
+    1.13,
+    0.8
+   ],
+   "flow_coeff": [
+    1.25,
+    1.08,
+    1.04,
+    0.98,
+    1.07
+   ]
+  },
+  "blade_rows": [
+   {
+    "name": "S1",
+    "type": "stator",
+    "count": 72,
+    "stations": {
+     "tip_LE": [
+      11.73,
+      39.95
+     ],
+     "hub_LE": [
+      11.73,
+      32.08
+     ],
+     "tip_TE": [
+      16.45,
+      42.69
+     ],
+     "hub_TE": [
+      16.45,
+      33.54
+     ]
+    },
+    "material": "René 77",
+    "cooled": true,
+    "angles": [
+     [
+      0,
+      0,
+      53.7,
+      0.11
+     ],
+     [
+      0.5,
+      0,
+      61.0,
+      0.09
+     ],
+     [
+      1,
+      0,
+      60.0,
+      0.08
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.55,
+     "h_over_AW": 1.92
+    }
+   },
+   {
+    "name": "R1",
+    "type": "rotor",
+    "count": 120,
+    "stations": {
+     "tip_LE": [
+      19.25,
+      44.23
+     ],
+     "hub_LE": [
+      19.25,
+      33.87
+     ],
+     "tip_TE": [
+      21.97,
+      45.45
+     ],
+     "hub_TE": [
+      21.97,
+      34.16
+     ]
+    },
+    "material": "René 125",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      43.0,
+      55.6,
+      0.12
+     ],
+     [
+      0.5,
+      47.9,
+      61.3,
+      0.08
+     ],
+     [
+      1,
+      35.7,
+      60.0,
+      0.06
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.33,
+     "h_over_AW": 4.02
+    }
+   },
+   {
+    "name": "S2",
+    "type": "stator",
+    "count": 102,
+    "stations": {
+     "tip_LE": [
+      24.2,
+      46.44
+     ],
+     "hub_LE": [
+      24.2,
+      34.52
+     ],
+     "tip_TE": [
+      27.92,
+      47.9
+     ],
+     "hub_TE": [
+      27.92,
+      34.99
+     ]
+    },
+    "material": "René 77",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      41.2,
+      55.8,
+      0.11
+     ],
+     [
+      0.5,
+      47.6,
+      64.1,
+      0.09
+     ],
+     [
+      1,
+      37.0,
+      62.9,
+      0.08
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.44,
+     "h_over_AW": 3.27
+    }
+   },
+   {
+    "name": "R2",
+    "type": "rotor",
+    "count": 122,
+    "stations": {
+     "tip_LE": [
+      29.66,
+      48.67
+     ],
+     "hub_LE": [
+      29.66,
+      35.41
+     ],
+     "tip_TE": [
+      32.4,
+      49.88
+     ],
+     "hub_TE": [
+      32.4,
+      35.75
+     ]
+    },
+    "material": "René 125",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      44.5,
+      55.8,
+      0.12
+     ],
+     [
+      0.5,
+      49.3,
+      63.8,
+      0.08
+     ],
+     [
+      1,
+      37.0,
+      62.8,
+      0.06
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.26,
+     "h_over_AW": 5.02
+    }
+   },
+   {
+    "name": "S3",
+    "type": "stator",
+    "count": 96,
+    "stations": {
+     "tip_LE": [
+      34.1,
+      50.73
+     ],
+     "hub_LE": [
+      34.1,
+      36.23
+     ],
+     "tip_TE": [
+      38.28,
+      52.24
+     ],
+     "hub_TE": [
+      38.28,
+      36.63
+     ]
+    },
+    "material": "René 77",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      40.0,
+      56.3,
+      0.11
+     ],
+     [
+      0.5,
+      49.1,
+      64.8,
+      0.09
+     ],
+     [
+      1,
+      36.8,
+      63.7,
+      0.08
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.47,
+     "h_over_AW": 3.64
+    }
+   },
+   {
+    "name": "R3",
+    "type": "rotor",
+    "count": 122,
+    "stations": {
+     "tip_LE": [
+      39.81,
+      53.04
+     ],
+     "hub_LE": [
+      39.81,
+      37.0
+     ],
+     "tip_TE": [
+      42.68,
+      54.03
+     ],
+     "hub_TE": [
+      42.68,
+      37.33
+     ]
+    },
+    "material": "René 125",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      44.7,
+      55.7,
+      0.12
+     ],
+     [
+      0.5,
+      47.8,
+      63.8,
+      0.08
+     ],
+     [
+      1,
+      31.1,
+      62.7,
+      0.06
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.24,
+     "h_over_AW": 5.74
+    }
+   },
+   {
+    "name": "S4",
+    "type": "stator",
+    "count": 114,
+    "stations": {
+     "tip_LE": [
+      44.79,
+      54.95
+     ],
+     "hub_LE": [
+      44.79,
+      37.48
+     ],
+     "tip_TE": [
+      48.55,
+      56.04
+     ],
+     "hub_TE": [
+      48.55,
+      37.48
+     ]
+    },
+    "material": "René 77",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      39.7,
+      56.2,
+      0.11
+     ],
+     [
+      0.5,
+      47.7,
+      62.3,
+      0.09
+     ],
+     [
+      1,
+      31.0,
+      59.7,
+      0.08
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.46,
+     "h_over_AW": 4.77
+    }
+   },
+   {
+    "name": "R4",
+    "type": "rotor",
+    "count": 156,
+    "stations": {
+     "tip_LE": [
+      50.62,
+      56.65
+     ],
+     "hub_LE": [
+      50.62,
+      37.05
+     ],
+     "tip_TE": [
+      52.94,
+      57.17
+     ],
+     "hub_TE": [
+      52.94,
+      36.83
+     ]
+    },
+    "material": "René 125",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      44.3,
+      55.4,
+      0.12
+     ],
+     [
+      0.5,
+      40.0,
+      60.5,
+      0.08
+     ],
+     [
+      1,
+      10.0,
+      58.2,
+      0.06
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.23,
+     "h_over_AW": 8.62
+    }
+   },
+   {
+    "name": "S5",
+    "type": "stator",
+    "count": 120,
+    "stations": {
+     "tip_LE": [
+      55.41,
+      57.68
+     ],
+     "hub_LE": [
+      55.41,
+      36.48
+     ],
+     "tip_TE": [
+      59.22,
+      57.82
+     ],
+     "hub_TE": [
+      59.22,
+      36.1
+     ]
+    },
+    "material": "René 77",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      36.5,
+      55.4,
+      0.11
+     ],
+     [
+      0.5,
+      37.0,
+      56.0,
+      0.09
+     ],
+     [
+      1,
+      16.5,
+      48.5,
+      0.08
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.48,
+     "h_over_AW": 5.41
+    }
+   },
+   {
+    "name": "R5",
+    "type": "rotor",
+    "count": 110,
+    "stations": {
+     "tip_LE": [
+      60.85,
+      57.82
+     ],
+     "hub_LE": [
+      60.85,
+      35.55
+     ],
+     "tip_TE": [
+      64.34,
+      57.82
+     ],
+     "hub_TE": [
+      64.34,
+      35.55
+     ]
+    },
+    "material": "René 125",
+    "cooled": false,
+    "angles": [
+     [
+      0,
+      40.5,
+      48.5,
+      0.12
+     ],
+     [
+      0.5,
+      24.2,
+      50.0,
+      0.08
+     ],
+     [
+      1,
+      -8.0,
+      48.4,
+      0.06
+     ]
+    ],
+    "table3": {
+     "AW_over_t": 1.3,
+     "h_over_AW": 6.36
+    }
+   },
+   {
+    "name": "TF",
+    "type": "stator",
+    "count": 12,
+    "material": "Inco 718",
+    "cooled": false,
+    "stations": {
+     "tip_LE": [
+      70.94,
+      57.82
+     ],
+     "tip_TE": [
+      79.94,
+      57.82
+     ],
+     "hub_LE": [
+      68.04,
+      35.56
+     ],
+     "hub_TE": [
+      92.84,
+      35.56
+     ]
+    },
+    "angles": [
+     [
+      0,
+      20.0,
+      0,
+      0.13
+     ],
+     [
+      0.5,
+      12.5,
+      0,
+      0.16
+     ],
+     [
+      1,
+      3.0,
+      0,
+      0.2
+     ]
+    ],
+    "note": "montanti del turbine frame: 12 montanti radiali fabbricati, curvati per togliere lo swirl residuo (CR-168219 p.90). Forma trapezia da CR-168219 Fig.35 scalata sull'altezza della pala del rotore 5 (22,3 cm): corda ~25 cm al mozzo e ~9 cm all'apice, bordo d'attacco 3,7 cm (mozzo) e 6,6 cm (apice) dopo il rotore 5; flangia esterna a +16,5 cm, anello del mozzo a +29 cm. Spessori stimati."
+   }
+  ]
+ },
+ "envelope_CR159584": {
+  "$comment": "NASA CR-159584 p.6 Tab.I (dimensioni FPS preliminare; spinta 162.4 kN = configurazione originale) highlight_to_max_diameter: CR-159584 p.6 testo.",
+  "fan_diameter_cm": 210.8,
+  "max_nacelle_diameter_cm": 248.9,
+  "inlet_length_from_fan_face_cm": 159.0,
+  "turbomachinery_length_fan_flange_to_LPT_aft_frame_flange_cm": 318.0,
+  "overall_nacelle_length_cm": 603.3,
+  "exhaust_nozzle_diameter_cm": 159.0,
+  "highlight_to_max_diameter": 0.86
+ }
+}

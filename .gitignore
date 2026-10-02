@@ -1,0 +1,6 @@
+# Report e articoli di riferimento: non ridistribuiti (si riscaricano con scripts/fetch_refs.sh)
+*.pdf
+refs/
+node_modules/
+dist/
+*.tsbuildinfo

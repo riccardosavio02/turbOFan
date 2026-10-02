@@ -1,0 +1,951 @@
+{
+ "$comment": "Contenuti della storia guidata. Ogni paragrafo cita le fonti con la frase originale (verificata da scripts/verify_claims.py contro il testo dei PDF). I segnaposto {{chiave}} sono numeri presi dalla specifica (src/content/facts.ts), già verificati dai test. 'focus' è un gruppo di src/scene/focus.ts. page = pagina stampata del report; pdfPage sostituisce page per le pagine in numeri romani.",
+ "sections": [
+  {
+   "id": "intro",
+   "kicker": "Il programma",
+   "title": "Un motore nato per consumare meno",
+   "focus": null,
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "L'Energy Efficient Engine (E³) è un programma della NASA, svolto con General Electric come costruttore, per sviluppare la tecnologia di motori da trasporto più efficienti nei consumi. Il motore di volo progettato nel programma, il Flight Propulsion System (FPS), è quello che vedete: un turbofan bialbero con fan da {{fan_d}} m e una spinta al decollo di progetto di {{thrust_to}} kN.",
+     "cites": [
+      "e3_program",
+      "thrust",
+      "fan_d"
+     ]
+    },
+    {
+     "text": "L'obiettivo della NASA era ridurre almeno del 12% il consumo specifico installato rispetto al CF6-50C. Il progetto finale stima una riduzione del 16,9% in crociera. Il rendimento propulsivo migliora con un fan a basso rapporto di compressione e con un mixer che unisce i due flussi prima dell'ugello. Il rendimento termico migliora con un rapporto di compressione globale più alto, temperature d'ingresso turbina più alte e componenti più efficienti.",
+     "cites": [
+      "goal_12",
+      "sfc_169",
+      "features",
+      "thermal"
+     ]
+    },
+    {
+     "text": "L'FPS non fu mai costruito come motore di serie. Le sue tecnologie furono provate al banco, componente per componente, poi in un motore «core» (compressore, combustore e turbina HP) e in un turbofan dimostratore completo, l'ICLS. Le prestazioni del sito sono quelle di progetto dell'FPS; le prove servono come confronto.",
+     "cites": [
+      "fps_projected",
+      "component_tests",
+      "test_vehicles"
+     ]
+    },
+    {
+     "text": "I due alberi, quello di bassa pressione (fan e turbina LP) e quello di alta pressione (compressore e turbina HP), girano nello stesso verso, su cinque cuscinetti sostenuti da due soli telai strutturali.",
+     "cites": [
+      "corotating",
+      "frames"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "inlet",
+   "kicker": "1 · Presa d'aria",
+   "title": "Rallentare l'aria prima del fan",
+   "focus": "inlet",
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "In crociera l'aria arriva a Mach 0,8, troppo veloce per il fan. Una presa d'aria subsonica la rallenta: parte del rallentamento avviene già davanti all'imbocco, il resto nel diffusore interno, dove la sezione cresce dalla gola fino al fan. Rallentando, la corrente converte pressione dinamica in pressione statica (effetto ram).",
+     "cites": [],
+     "refs": [
+      "mattingly"
+     ]
+    },
+    {
+     "text": "Nella configurazione FPS del 1980 la presa d'aria è lunga {{inlet_l}} cm dalla faccia del fan. Il diametro d'imbocco è {{hl_ratio}} volte il diametro massimo della gondola, e la presa è trattata acusticamente per ridurre il rumore del fan irradiato in avanti.",
+     "cites": [
+      "inlet_table",
+      "highlight",
+      "inlet_acoustic"
+     ]
+    },
+    {
+     "text": "La forma interna del modello (labbro, gola e diffusore) è ricostruita: i report danno lunghezza e diametri, non il profilo. Con la portata di progetto il Mach calcolato scende da circa 0,73 in gola a circa 0,64 alla faccia del fan.",
+     "cites": [],
+     "note": "Ricostruzione: valori calcolati dal modello (test in src/data/combustor.test.ts)."
+    }
+   ]
+  },
+  {
+   "id": "fan",
+   "kicker": "2 · Fan",
+   "title": "32 pale piene in titanio",
+   "focus": "fan",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Il fan ha {{fan_blades}} pale piene in titanio, con uno shroud al 55% dell'altezza: un anello formato da appendici delle pale che si toccano tra loro e irrigidiscono la schiera contro le vibrazioni. GE lo scelse dopo un confronto tra pale piene o cave, con o senza shroud: questa soluzione dava il minor consumo di combustibile senza compromettere la durata del fan.",
+     "cites": [
+      "fan_32",
+      "fan_solid",
+      "shroud_choice",
+      "lowest_fuel"
+     ],
+     "refs": [
+      "cumpsty"
+     ]
+    },
+    {
+     "text": "La velocità periferica corretta di progetto è {{fan_tip}} m/s. Le sezioni esterne della pala lavorano in regime transonico, con Mach relativo d'ingresso fino a 1,4 all'apice; quelle vicine al mozzo in regime subsonico. Per questo ogni sezione ha un profilo diverso, progettato lungo 12 superfici di corrente.",
+     "cites": [
+      "tip_speed",
+      "transonic",
+      "mach14",
+      "streamsurf"
+     ]
+    },
+    {
+     "text": "Al banco di prova il fan ha superato tutti gli obiettivi di portata, rendimento e margine di stallo: a max climb il rendimento adiabatico del bypass è stato di 0,886, 1,7 punti sopra l'obiettivo del componente.",
+     "cites": [
+      "fan_goals",
+      "fan_eta_test"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "booster",
+   "kicker": "3 · Booster e isola",
+   "title": "Un quarto di stadio che ripulisce l'aria del core",
+   "focus": "booster",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Sotto un'«isola» anulare c'è il quarter-stage, un piccolo rotore di {{booster_blades}} pale. Circa il 22% della portata totale passa sotto l'isola e viene compresso ulteriormente; dopo il rotore, il 42% di questo flusso rientra nel bypass e il resto prosegue verso il compressore HP.",
+     "cites": [
+      "booster_22",
+      "booster_42"
+     ]
+    },
+    {
+     "text": "Il vantaggio non è solo aerodinamico. I detriti ingeriti vicino al mozzo vengono centrifugati verso l'esterno delle pale del booster e finiscono nel bypass, invece di entrare nel compressore.",
+     "cites": [
+      "fod"
+     ]
+    },
+    {
+     "text": "Le {{inner_ogv}} palette che raddrizzano il flusso diretto al core hanno una forte freccia all'indietro (60°) e un'inclinazione tangenziale. La freccia segue la forma del condotto che scende verso il compressore; l'inclinazione riduce il Mach al mozzo.",
+     "cites": [
+      "inner_ogv",
+      "sweep60",
+      "lean_mach"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bypass",
+   "kicker": "4 · Bypass e fan frame",
+   "title": "Le palette che reggono il motore",
+   "focus": "bypass",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Le {{ogv_n}} palette di uscita del bypass hanno due ruoli: raddrizzano il flusso del fan e sono il telaio strutturale anteriore. Sono integrate nel fan frame in composito di grafite e distanti circa 1,9 corde dalle pale del fan, per ridurre il rumore.",
+     "cites": [
+      "ogv_frame",
+      "ogv_structural",
+      "ogv_composite"
+     ]
+    },
+    {
+     "text": "Non sono tutte uguali: cinque tipi con incurvatura diversa sono distribuiti lungo la circonferenza per ridurre la distorsione del flusso dovuta al pilone.",
+     "cites": [
+      "ogv_types"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hpc",
+   "kicker": "5 · Compressore di alta pressione",
+   "title": "Rapporto 23 in soli 10 stadi",
+   "focus": "hpc",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Il compressore HP raggiunge un rapporto di compressione di 23 in soli {{hpc_stages}} stadi. All'epoca era il progetto con il rapporto più alto mai affrontato da GE: l'aumento di pressione è di circa il 30% superiore a quello di qualunque compressore monoalbero di serie.",
+     "cites": [
+      "hpc_23",
+      "hpc_highest",
+      "hpc_record"
+     ]
+    },
+    {
+     "text": "I primi quattro rotori sono transonici. Per avere un margine di stallo adeguato ai bassi regimi, l'IGV e gli statori da 1 a 4 sono a calettamento variabile.",
+     "cites": [
+      "hpc_transonic",
+      "hpc_vsv",
+      "hpc_stall"
+     ]
+    },
+    {
+     "text": "Le pale degli stadi 1–5 sono in titanio, quelle degli stadi 6–10 in Inco 718, una superlega di nichel adatta alle temperature più alte. La cassa posteriore è raffreddata con aria del 5° stadio per stringere i giochi all'apice delle pale.",
+     "cites": [
+      "hpc_materials",
+      "hpc_acc"
+     ]
+    },
+    {
+     "text": "Nella prova del core, a crociera massima, il compressore ha raggiunto un rendimento dell'85,6% contro l'obiettivo dell'85,1%. Il valore è corretto per le perdite della strumentazione interstadio, per quelle degli statori variabili 5 e 6 e per l'effetto del numero di Reynolds.",
+     "cites": [
+      "core_hpc_eta"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "combustor",
+   "kicker": "6 · Combustore",
+   "title": "Due fiamme, una sopra l'altra",
+   "focus": "combustor",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": false
+   },
+   "paragraphs": [
+    {
+     "text": "La caratteristica più originale del combustore è il doppio anello: due zone di combustione sovrapposte. Così si ottengono emissioni molto basse mantenendo il motore corto.",
+     "cites": [
+      "double_annular"
+     ]
+    },
+    {
+     "text": "Ai bassi regimi brucia solo la zona pilota esterna, ottimizzata per miscele povere; ad alta potenza si accende anche la zona main interna, ottimizzata per miscele più ricche. Il prediffusore divide l'aria del compressore: il 48% verso la cupola pilota, il resto verso la main.",
+     "cites": [
+      "pilot_only",
+      "main_rich",
+      "prediffuser_48"
+     ]
+    },
+    {
+     "text": "La cupola ha 60 swirler identici, alimentati da 30 iniettori a doppia punta. I liner sono a doppia parete: la parete interna è fatta di segmenti («shingle») raffreddati a impingement e a film.",
+     "cites": [
+      "swirl_60",
+      "liners"
+     ]
+    },
+    {
+     "text": "Nella prova del core il rendimento di combustione è stato del 99,9%. Gli ossidi di azoto sono risultati sopra l'obiettivo: le modifiche necessarie erano già state verificate in prove al banco.",
+     "cites": [
+      "comb_eta",
+      "nox"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hpt",
+   "kicker": "7 · Turbina di alta pressione",
+   "title": "Il punto più caldo del motore",
+   "focus": "hpt",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true,
+    "flowMap": "T"
+   },
+   "paragraphs": [
+    {
+     "text": "Il primo distributore della turbina HP riceve il gas più caldo del motore, appena uscito dal combustore. La temperatura di progetto all'ingresso del rotore (T41) è {{t41_climb}} K a max climb e {{t41_to}} K al decollo in giornata calda. La turbina ha due stadi a carico moderato e trascina il compressore HP.",
+     "cites": [
+      "two_stage",
+      "t41",
+      "cycle_table"
+     ]
+    },
+    {
+     "text": "Il primo stadio fornisce il 56,5% del lavoro. È il valore minimo che consente di raffreddare il secondo distributore con aria del 7° stadio del compressore: con una ripartizione più favorevole servirebbe aria dell'8° stadio, con un aumento netto del consumo.",
+     "cites": [
+      "work_565",
+      "sfc_8th"
+     ]
+    },
+    {
+     "text": "Il raffreddamento cambia da stadio a stadio. Il distributore 1 e le sue fasce sono raffreddati a impingement e a film. Nella pala del rotore 1 l'aria percorre circuiti a serpentina ed esce attraverso la parete come film; il bordo d'attacco ha tre file di fori radiali. Nel distributore 2 l'aria colpisce la parete interna attraverso un inserto forato (impingement), la raffredda per convezione ed esce da fessure sul lato in pressione del bordo d'uscita. La pala del rotore 2 dell'FPS, in eutettico solidificato direzionalmente, non è raffreddata; nei motori di prova era in René 150, raffreddata per convezione senza fori di film.",
+     "cites": [
+      "vane1_film",
+      "blade1_film",
+      "le_holes",
+      "vane2",
+      "blade2",
+      "blade2_test"
+     ]
+    },
+    {
+     "text": "Sopra le pale del primo stadio c'è uno shroud ceramico, che richiede meno aria di raffreddamento. Il gioco all'apice è controllato attivamente, soffiando aria del fan sulla cassa.",
+     "cites": [
+      "ceramic_shroud",
+      "hpt_acc"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lpt",
+   "kicker": "8 · Turbina di bassa pressione",
+   "title": "Cinque stadi per muovere il fan",
+   "focus": "lpt",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "La turbina LP ha cinque stadi a carico moderato e trascina il fan e il booster. È collegata alla turbina HP da un condotto di transizione lungo solo 7,62 cm. Il condotto si allarga verso valle, con la parete esterna inclinata di 25°.",
+     "cites": [
+      "lpt_5",
+      "lpt_duct"
+     ]
+    },
+    {
+     "text": "Il quarto rotore ha {{lpt_r4}} pale ed è più distante dal suo statore (1,4 corde): con più pale e più distanza si ottiene il cut-off acustico e si riduce il rumore che esce dalla turbina.",
+     "cites": [
+      "lpt_acoustic",
+      "lpt_noise"
+     ]
+    },
+    {
+     "text": "Nella turbina LP i profili non sono raffreddati. Fa eccezione il primo distributore, attraversato dall'aria di spurgo.",
+     "cites": [
+      "lpt_uncooled"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shafts",
+   "kicker": "9 · Alberi e cuscinetti",
+   "title": "Due alberi coassiali, cinque cuscinetti",
+   "focus": "shafts",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Il motore ha due sole camere dei cuscinetti (sump). L'albero LP poggia su tre cuscinetti, uno a sfere e due a rulli. L'albero HP poggia su un reggispinta anteriore e su un cuscinetto a rulli interalbero posteriore, montato tra albero HP e albero LP.",
+     "cites": [
+      "bearings",
+      "hp_bearings"
+     ]
+    },
+    {
+     "text": "Il cuscinetto interalbero evita un telaio strutturale nella zona calda tra le turbine, con il suo fabbisogno di aria di raffreddamento. Le vibrazioni del rotore HP sono controllate da un supporto calibrato con uno smorzatore a film d'olio sul cuscinetto anteriore del core.",
+     "cites": [
+      "intershaft",
+      "squeeze_film",
+      "damper_fwd"
+     ]
+    },
+    {
+     "text": "Nel modello le geometrie di dischi, alberi e cuscinetti sono stime: l'architettura viene dai report, le dimensioni no.",
+     "cites": []
+    }
+   ]
+  },
+  {
+   "id": "exhaust",
+   "kicker": "10 · Telaio posteriore, mixer e ugello",
+   "title": "Mescolare caldo e freddo",
+   "focus": "exhaust",
+   "scene": {
+    "cutaway": true,
+    "nacelle": false,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Dietro la turbina LP, il telaio posteriore regge il cono centrale, il mixer e il cuscinetto n. 5, con 12 montanti radiali e una cassa poligonale. I montanti sono incurvati per togliere al gas la rotazione residua.",
+     "cites": [
+      "frame_supports",
+      "frame_struts",
+      "frame_swirl"
+     ]
+    },
+    {
+     "text": "Il mixer a 18 lobi mescola il getto caldo del core con l'aria fredda del bypass prima di un unico ugello convergente-divergente. Mescolare i due flussi aumenta il rendimento propulsivo rispetto a due getti separati.",
+     "cites": [
+      "mixer_18",
+      "features",
+      "nozzle_cd"
+     ]
+    },
+    {
+     "text": "Dal cono centrale sporge un tubo che scarica oltre l'ugello l'aria di spurgo e di trafilamento del sump posteriore e delle cavità del telaio.",
+     "cites": [
+      "vent_tube"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cycle",
+   "kicker": "11 · Il ciclo termodinamico",
+   "title": "Seguire una particella d'aria",
+   "focus": null,
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": false,
+    "flowMap": "T"
+   },
+   "paragraphs": [
+    {
+     "text": "La sezione è colorata con la temperatura totale calcolata dal modello di ciclo del sito, che usa come ingressi i dati di progetto dei report. A max climb (Mach 0,8, 10,67 km, ISA+10) l'aria entra a circa {{t2}} K ed esce dal compressore a circa {{t3}} K, con un rapporto di compressione globale di {{opr_climb}}. All'ingresso del rotore della turbina HP il gas è a {{t41_climb}} K.",
+     "cites": [
+      "cycle_table"
+     ]
+    },
+    {
+     "text": "Senza alcuna taratura, il modello riproduce i valori pubblicati entro pochi punti percentuali: temperatura e pressione d'ingresso del compressore, lavoro e portata delle turbine, consumo specifico. Il confronto completo è nella pagina «Esplora», menu «Ciclo».",
+     "cites": []
+    }
+   ]
+  },
+  {
+   "id": "triangles",
+   "kicker": "12 · Triangoli di velocità",
+   "title": "Come una pala scambia lavoro con l'aria",
+   "focus": "hpc",
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Dentro ogni stadio la corrente cambia direzione. Lo descrivono i triangoli di velocità, che compongono la velocità assoluta V, quella relativa alla pala W e la velocità periferica U = ω·r. In un rotore di compressore la pala devia la corrente relativa e aumenta la rotazione assoluta del flusso: il lavoro trasferito all'aria è U2·Vθ2 − U1·Vθ1 (equazione di Eulero delle turbomacchine).",
+     "cites": [],
+     "refs": [
+      "mattingly"
+     ]
+    },
+    {
+     "text": "Per il compressore HP i triangoli del sito sono calcolati dal ciclo e confrontati con quelli di progetto pubblicati da GE: gli angoli relativi d'ingresso e d'uscita coincidono entro 3° in tutti e dieci i rotori. Nel primo rotore il Mach relativo d'ingresso supera 1: è uno dei quattro rotori transonici del compressore.",
+     "cites": [
+      "vector_table",
+      "hpc_transonic"
+     ]
+    },
+    {
+     "text": "Nelle turbine succede il contrario: il distributore accelera il gas e lo fa ruotare, il rotore ne toglie la rotazione ed estrae lavoro. Scegli un rotore qui sotto per vedere i suoi triangoli nel punto di funzionamento del modello.",
+     "cites": []
+    }
+   ]
+  },
+  {
+   "id": "offdesign",
+   "kicker": "13 · Fuori progetto",
+   "title": "Dalla salita al decollo",
+   "focus": null,
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": false,
+    "flowMap": "P"
+   },
+   "paragraphs": [
+    {
+     "text": "Un motore lavora quasi sempre fuori dal punto di progetto. Il modello fuori progetto del sito tratta le turbine come strozzate, tiene fisse le aree del mixer e dell'ugello e legge i rendimenti di fan e compressore HP sulle loro mappe, digitalizzate dalle prove al banco. È tarato solo a max climb e da lì prevede gli altri punti.",
+     "cites": [],
+     "refs": [
+      "mattingly"
+     ]
+    },
+    {
+     "text": "Al decollo prevede {{to_thrust_pred}} kN di spinta contro {{thrust_to}} kN, e un rapporto di compressione del compressore HP di {{to_hpc_pred}} contro 20,8. In crociera la portata corretta del fan prevista differisce da quella misurata al banco di meno dell'1%.",
+     "cites": [
+      "cycle_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "method",
+   "kicker": "Metodo",
+   "title": "Come è costruito questo modello",
+   "focus": null,
+   "scene": {
+    "cutaway": true,
+    "nacelle": true,
+    "spinning": true
+   },
+   "paragraphs": [
+    {
+     "text": "Le pale di fan e compressore sono generate dalle tabelle di progetto originali: corda, calettamento, incurvatura e spessore, fino a 23 sezioni per schiera. Turbine, combustore e condotti vengono da sezioni quotate e da disegni scalati su quote note. I dati estratti sono controllati da test automatici che confrontano dati indipendenti dei report, e ogni citazione del testo è confrontata con il testo originale.",
+     "cites": []
+    },
+    {
+     "text": "Questa è una ricostruzione didattica non ufficiale, basata su report NASA di pubblico dominio. Le forme dei profili alari, dei dischi e di alcune superfici sono stime dichiarate nel pannello di ogni componente.",
+     "cites": []
+    }
+   ]
+  }
+ ],
+ "refs": {
+  "mattingly": "J. D. Mattingly, Elements of Gas Turbine Propulsion, McGraw-Hill, 1996 (cap. 4 e 8: prese d'aria subsoniche; analisi delle prestazioni fuori progetto).",
+  "cumpsty": "N. A. Cumpsty, Compressor Aerodynamics, Krieger, 2004 (shroud a metà pala e stabilità aeroelastica dei fan)."
+ },
+ "citations": {
+  "e3_program": {
+   "doc": "CR-168219",
+   "pdfPage": 3,
+   "quote": "The Energy Efficient Engine (E3) is a NASA program to create fuel saving technology for future transport engines."
+  },
+  "thrust": {
+   "doc": "CR-168219",
+   "page": 32,
+   "quote": "increased takeoff thrust from 162.4 kN (36,500 lbf) to 173.5 kN (39,000 lbf)"
+  },
+  "fan_d": {
+   "doc": "CR-168219",
+   "page": 32,
+   "quote": "Fan tip diameter is still 211 cm (83 in)"
+  },
+  "goal_12": {
+   "doc": "CR-168219",
+   "page": 6,
+   "quote": "Minimum of 12% reduction in installed sfc compared to a CF6-50C at maximum cruise thrust"
+  },
+  "sfc_169": {
+   "doc": "CR-168219",
+   "pdfPage": 3,
+   "quote": "a 16.9% lower installed specific fuel consumption than a CF6-50C"
+  },
+  "features": {
+   "doc": "CR-168219",
+   "page": 9,
+   "quote": "achieves high propulsive efficiency by utilizing a low fan pressure ratio and a mixer than combines the fan and core streams prior to discharging them through a common exhaust nozzle"
+  },
+  "corotating": {
+   "doc": "CR-168219",
+   "page": 10,
+   "quote": "Both shafts rotate in the same direction."
+  },
+  "frames": {
+   "doc": "CR-168219",
+   "page": 10,
+   "quote": "Two frame components and five bearings are used."
+  },
+  "inlet_table": {
+   "doc": "CR-159584",
+   "page": 6,
+   "quote": "Important engine and nacelle dimensions are given in Table I.",
+   "visual": "Tab. I: Inlet Length from Fan Face 159.0 cm (62.6 in) — valore letto sull'immagine della pagina (OCR delle colonne non allineato)."
+  },
+  "highlight": {
+   "doc": "CR-159584",
+   "page": 6,
+   "quote": "with a highlight diameter to maximum diameter ratio of 0.86"
+  },
+  "inlet_acoustic": {
+   "doc": "CR-159584",
+   "page": 6,
+   "quote": "The inlet is acoustically treated and sized to minimize forward-radiated fan noise."
+  },
+  "fan_32": {
+   "doc": "CR-165148",
+   "page": 3,
+   "quote": "The fan rotor has 32 medium-aspect-ratio blades with a part-span shroud at 55% blade height based on the stacking axis."
+  },
+  "shroud_choice": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "The tradeoffs involved tip speed, number of blades, solid or hollow blades, single fan stage versus fan plus booster stages, and shrouded versus unshrouded blading."
+  },
+  "tip_speed": {
+   "doc": "CR-168219",
+   "page": 41,
+   "quote": "The design-corrected tip speed is 411.5 m/s (1350 ft/s)"
+  },
+  "transonic": {
+   "doc": "CR-168219",
+   "page": 41,
+   "quote": "the airfoil sections are transonic in the outer region and subsonic near the hub"
+  },
+  "mach14": {
+   "doc": "CR-168219",
+   "page": 43,
+   "quote": "since the inlet Mach numbers are supersonic for all streamlines above the quarter-stage island, reaching 1.4 at the tip"
+  },
+  "fan_eta_test": {
+   "doc": "CR-168070",
+   "page": 3,
+   "quote": "the fan bypass momentum averaged, adiabatic efficiency was 0.886, 1.7 points higher than the component goal"
+  },
+  "booster_22": {
+   "doc": "CR-165148",
+   "page": 3,
+   "quote": "with 22.3% of the flow passing under the island and supercharged by the quarter-stage rotor"
+  },
+  "booster_42": {
+   "doc": "CR-168219",
+   "page": 41,
+   "quote": "the flow is further split with 42% of the booster flow reentering the bypass stream"
+  },
+  "fod": {
+   "doc": "CR-168219",
+   "page": 37,
+   "quote": "debris ingested in the hub region tends to be centrifuged to the outer span of the booster blades and pass into the fan bypass duct"
+  },
+  "inner_ogv": {
+   "doc": "CR-168219",
+   "page": 43,
+   "quote": "To do this efficiently, the 64 vanes are swept aft and leaned"
+  },
+  "ogv_frame": {
+   "doc": "CR-168219",
+   "page": 37,
+   "quote": "The fan outlet guide vanes are integral with the fan frame and spaced 1.9 chord lengths aft of the fan blade for acoustic purposes."
+  },
+  "ogv_composite": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "The integral fan frame-outlet guide vane is a graphite composite structure with an aluminum hub."
+  },
+  "ogv_types": {
+   "doc": "CR-165148",
+   "page": 1,
+   "quote": "The bypass vane-frame airfoils are grouped into five different camber types positioned circumferentially to minimize the distortion of the flow field, recognizing the presence of the pylon"
+  },
+  "hpc_23": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "it achieves a high pressure ratio (23:1) in only 10 stages"
+  },
+  "hpc_record": {
+   "doc": "CR-168219",
+   "page": 49,
+   "quote": "the pressure rise is approximately 30% greater than that of any production single-spool aircraft engine compressor"
+  },
+  "hpc_transonic": {
+   "doc": "CR-168219",
+   "page": 52,
+   "quote": "The first four rotors were transonic blade rows"
+  },
+  "hpc_vsv": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "The IGV plus stators 1 through 4 are variable."
+  },
+  "hpc_materials": {
+   "doc": "CR-168219",
+   "page": 56,
+   "quote": "Blading for rotor Stages 1 through 5 is fabricated from titanium while the blading for Stages 6 through 10 is of Inco 718 material."
+  },
+  "hpc_acc": {
+   "doc": "CR-168219",
+   "page": 56,
+   "quote": "bathing the structural rings with cooler Rotor 5 discharge air to shrink the casing closer to the rotor blade tips"
+  },
+  "core_hpc_eta": {
+   "doc": "CR-168069",
+   "page": 1,
+   "quote": "When adjusted for interstage instrumentation loss, variable Stators 5 and 6 loss, and Reynolds number effects, core compressor efficiency at the maximum cruise operating point was 85.6%. The goal efficiency for the core compressor was 85.1%."
+  },
+  "double_annular": {
+   "doc": "CR-168219",
+   "page": 57,
+   "quote": "The most unique feature of the combustor is the double annular arrangement. This achieves very low emissions while retaining very short engine length."
+  },
+  "pilot_only": {
+   "doc": "CR-168219",
+   "page": 57,
+   "quote": "Only the outer pilot zone is used at low power levels"
+  },
+  "prediffuser_48": {
+   "doc": "CR-168219",
+   "page": 57,
+   "quote": "Forty-eight percent of the air flows through the outer passage of the prediffuser toward the pilot stage dome"
+  },
+  "swirl_60": {
+   "doc": "CR-168219",
+   "page": 61,
+   "quote": "The double annular dome design consists of 60 identical swirl cups. Fuel is injected into the combustor through 30 dual-tip fuel nozzle assemblies."
+  },
+  "liners": {
+   "doc": "CR-168219",
+   "page": 61,
+   "quote": "The liners are of double wall construction and use impingement plus spent-film cooling on the segmented (shingle) section adjacent to the hot gas stream."
+  },
+  "comb_eta": {
+   "doc": "CR-168069",
+   "page": 2,
+   "quote": "Combustor efficiency was 99.9%, exceeding the goal of 99.6%."
+  },
+  "nox": {
+   "doc": "CR-168069",
+   "page": 2,
+   "quote": "Oxides of nitrogen emissions were higher than goal. Prior rig testing established design changes which will result in all emissions goals being met in an FPS."
+  },
+  "two_stage": {
+   "doc": "CR-168219",
+   "page": 65,
+   "quote": "a two-stage turbine of moderate loading was selected"
+  },
+  "t41": {
+   "doc": "CR-168219",
+   "page": 33,
+   "quote": "The HPT rotor inlet temperatures shown in Table XII for each rating are at the flat-rating temperature condition."
+  },
+  "work_565": {
+   "doc": "CR-168219",
+   "page": 71,
+   "quote": "the stage work distribution was selected at 56.5% in the first stage, the minimum consistent with seventh stage extraction"
+  },
+  "vane1_film": {
+   "doc": "CR-168219",
+   "page": 73,
+   "quote": "Cooling air impingement and film are used to cool the Stage 1 vanes and bands."
+  },
+  "blade1_film": {
+   "doc": "CR-168219",
+   "page": 73,
+   "quote": "impinges on the back side of the leading edge, and then flows through the airfoil wall to provide film cooling"
+  },
+  "le_holes": {
+   "doc": "CR-167955",
+   "page": 40,
+   "quote": "Leading-edge film cooling is supplied by three rows of radial holes."
+  },
+  "vane2": {
+   "doc": "CR-168219",
+   "page": 75,
+   "quote": "The Stage 2 vane cooling air passes through holes in an insert to impinge on the vane wall, then provides cooling of internal walls by convection, and is subsequently ejected through slots on the pressure side of the vane's trailing edge."
+  },
+  "blade2": {
+   "doc": "CR-168219",
+   "page": 75,
+   "quote": "The Stage 2 blade is a high taper design using DS eutectic material and is not cooled."
+  },
+  "ceramic_shroud": {
+   "doc": "CR-168219",
+   "page": 72,
+   "quote": "Ceramic shrouds require less cooling air compared to other types of shroud material."
+  },
+  "hpt_acc": {
+   "doc": "CR-168219",
+   "page": 65,
+   "quote": "Clearances are closed by impinging fan air on the HPT case."
+  },
+  "lpt_5": {
+   "doc": "CR-168219",
+   "page": 82,
+   "quote": "The LPT is a five stage, moderately loaded, low throughflow design with an outer wall slope of 25 and with acoustic treatment designed into it."
+  },
+  "lpt_duct": {
+   "doc": "CR-168219",
+   "page": 82,
+   "quote": "The LPT is close coupled to the HPT by means of a 7.62 cm (3 in.) axial length transition duct."
+  },
+  "lpt_acoustic": {
+   "doc": "CR-168219",
+   "page": 85,
+   "quote": "The axial gap between the Stage 4 vane and Stage 4 blade is increased to 1.4 blade chord lengths and the number of the Stage 4 blades is increased to achieve cutoff tuning."
+  },
+  "lpt_uncooled": {
+   "doc": "CR-168219",
+   "page": 89,
+   "quote": "Except for cooling of the Stage 1 vane by the purge air flowing through it, no airfoil cooling is used in the LPT."
+  },
+  "bearings": {
+   "doc": "CR-168219",
+   "page": 96,
+   "quote": "It is a five-bearing machine with three bearings, a ball and two roller bearings, supporting the low pressure (LP) system."
+  },
+  "intershaft": {
+   "doc": "CR-168219",
+   "page": 96,
+   "quote": "eliminates the need for a \"hot\" frame with its cooling air requirements"
+  },
+  "squeeze_film": {
+   "doc": "CR-168219",
+   "page": 135,
+   "quote": "A high load squeeze film damper has been designed as an integral part of the FPS engine system."
+  },
+  "frame_struts": {
+   "doc": "CR-168219",
+   "page": 90,
+   "quote": "by using a variable thickness polygonal outer casing, 12 radial struts, and heated rings on the inner casing"
+  },
+  "frame_swirl": {
+   "doc": "CR-168219",
+   "page": 95,
+   "quote": "the struts have been cambered to remove residual turbine swirl"
+  },
+  "mixer_18": {
+   "doc": "CR-168219",
+   "page": 102,
+   "quote": "It uses 18 scalloped lobes with corresponding corrugations in the centerbody."
+  },
+  "nozzle_cd": {
+   "doc": "CR-168219",
+   "page": 101,
+   "quote": "The FPS has a low area ratio, converging-diverging exhaust nozzle"
+  },
+  "vent_tube": {
+   "doc": "CR-168219",
+   "page": 101,
+   "quote": "A center vent tube extending from the tail cone, located ahead of the exhaust plane, out through the center of the nozzle, vents purge and leakage air"
+  },
+  "cycle_table": {
+   "doc": "CR-168219",
+   "page": 35,
+   "quote": "Table XII. FPS Cycle Definition.",
+   "visual": "Tab. XII: valori letti sull'immagine della pagina e riportati in engines/ge-e3.json (cycle)."
+  },
+  "thermal": {
+   "doc": "CR-168219",
+   "page": 9,
+   "quote": "Higher thermal efficiency is achieved by using higher engine pressure ratio, increased high pressure turbine inlet temperatures, and improved component performance"
+  },
+  "fps_projected": {
+   "doc": "CR-168069",
+   "page": 3,
+   "quote": "The FPS is executed only through the design phase."
+  },
+  "test_vehicles": {
+   "doc": "CR-168219",
+   "page": 3,
+   "quote": "The core engine and integrated core/low spool (ICLS) engine tests have been completed."
+  },
+  "fan_solid": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "led to the selection of 32 solid titanium blades"
+  },
+  "lowest_fuel": {
+   "doc": "CR-168219",
+   "page": 45,
+   "quote": "This provided the lowest fuel burned without imperiling the long life capability of the fan."
+  },
+  "streamsurf": {
+   "doc": "CR-168219",
+   "page": 43,
+   "quote": "The designs of the rotor blade sections were performed along 12 axisymmetric streamsurfaces"
+  },
+  "sweep60": {
+   "doc": "CR-168219",
+   "page": 43,
+   "quote": "was selected to be compatible with the shape of the flowpath in the region entering the core duct"
+  },
+  "lean_mach": {
+   "doc": "CR-168219",
+   "page": 43,
+   "quote": "The degree of lean was chosen primarily to control and minimize the level of Mach number in the hub region"
+  },
+  "hpc_highest": {
+   "doc": "CR-168219",
+   "page": 49,
+   "quote": "it is still the highest pressure ratio design that General Electric has ever undertaken"
+  },
+  "hpc_stall": {
+   "doc": "CR-168219",
+   "page": 49,
+   "quote": "Both variable stators and starting bleed were provided to aid in achieving adequate low speed stall margin."
+  },
+  "main_rich": {
+   "doc": "CR-168219",
+   "page": 57,
+   "quote": "The inner main zone is tuned for higher fuel-air ratios."
+  },
+  "sfc_8th": {
+   "doc": "CR-168219",
+   "page": 71,
+   "quote": "it would have been necessary to shift from compressor seventh to eighth stage cooling air extraction, with a net increase in sfc"
+  },
+  "blade2_test": {
+   "doc": "CR-167955",
+   "page": 57,
+   "quote": "No Film-Cooling or Trailing-Edge Holes"
+  },
+  "lpt_noise": {
+   "doc": "CR-168219",
+   "page": 85,
+   "quote": "This reduces the amount of sound propagating out of the turbine."
+  },
+  "hp_bearings": {
+   "doc": "CR-168219",
+   "page": 96,
+   "quote": "The high pressure (HP) system is supported by a forward thrust bearing and an aft intershaft roller bearing."
+  },
+  "damper_fwd": {
+   "doc": "CR-168219",
+   "page": 135,
+   "quote": "combined with a multiple film squeeze film damper located at the core rotor forward bearing"
+  },
+  "frame_supports": {
+   "doc": "CR-168219",
+   "page": 90,
+   "quote": "this frame has been designed for removing residual turbine swirl and supporting the centerbody, mixer, and the No. 5 bearing housing"
+  },
+  "wide_range": {
+   "doc": "CR-168219",
+   "page": 57,
+   "quote": "The double-annular feature is used to provide low emissions over a wide range of power levels."
+  },
+  "fan_cowling": {
+   "doc": "CR-159584",
+   "page": 5,
+   "quote": "This is especially true of the fan cowling which is incorporated in the structure of the fan frame."
+  },
+  "component_tests": {
+   "doc": "CR-168219",
+   "page": 3,
+   "quote": "The component test program has been completed."
+  },
+  "fan_goals": {
+   "doc": "CR-168070",
+   "page": 3,
+   "quote": "with the fan exceeding all of its component test goals of flow, efficiency and stall margin"
+  },
+  "ogv_structural": {
+   "doc": "CR-165148",
+   "page": 1,
+   "quote": "which also serve as the fan frame structural members"
+  },
+  "no4": {
+   "doc": "CR-168219",
+   "page": 98,
+   "quote": "The No. 4 bearing is an intershaft roller bearing"
+  },
+  "vector_table": {
+   "doc": "CR-165558",
+   "page": 112,
+   "quote": "Vector Diagram and Airfoil Geometry Data for Original-Design Blading"
+  }
+ }
+}

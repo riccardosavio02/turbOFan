@@ -1,0 +1,333 @@
+{
+ "$comment": "Combustore anulare a doppio anello del GE E3. Fonte: NASA CR-169301 (Burrus et al., GE, marzo 1984), 497 pagine. Coordinate [Z, R] in cm nel riferimento del MOTORE. Pagina PDF = pagina report + 15.",
+ "prediffuser_Fig90": {
+  "src": "CR-169301 Fig.90 p.141 (tabella in cm, verificata su immagine)",
+  "x_origin": "bordo d'uscita delle OGV del compressore = uscita HPC (Z = 184.207 cm nel motore)",
+  "inlet_radii_cm": {
+   "tip": 29.342,
+   "hub": 27.356,
+   "note": "coincidono con l'uscita dello statore 10 HPC in CR-165558 Tab.XXI (29.342 / 27.357)"
+  },
+  "flow_split": {
+   "outer_pilot": 0.48,
+   "inner_main": 0.52
+  },
+  "columns": [
+   "X",
+   "Y1_inner_wall",
+   "Y2_splitter_inner",
+   "Y3_splitter_outer",
+   "Y4_outer_wall"
+  ],
+  "rows": [
+   [
+    0,
+    27.356,
+    null,
+    null,
+    29.342
+   ],
+   [
+    0.508,
+    27.347,
+    null,
+    null,
+    29.356
+   ],
+   [
+    1.016,
+    27.319,
+    null,
+    null,
+    29.398
+   ],
+   [
+    1.524,
+    27.272,
+    null,
+    null,
+    29.468
+   ],
+   [
+    1.676,
+    27.255,
+    28.43,
+    28.43,
+    29.494
+   ],
+   [
+    1.778,
+    27.242,
+    28.372,
+    28.504,
+    29.514
+   ],
+   [
+    2.032,
+    27.207,
+    28.372,
+    28.536,
+    29.557
+   ],
+   [
+    2.54,
+    27.123,
+    28.372,
+    28.613,
+    29.696
+   ],
+   [
+    3.048,
+    27.019,
+    28.372,
+    28.708,
+    29.856
+   ],
+   [
+    3.556,
+    26.906,
+    28.372,
+    28.82,
+    30.049
+   ],
+   [
+    4.064,
+    26.799,
+    28.372,
+    28.952,
+    30.278
+   ],
+   [
+    4.572,
+    26.7,
+    28.372,
+    29.102,
+    30.542
+   ],
+   [
+    5.08,
+    26.608,
+    28.372,
+    29.269,
+    30.818
+   ],
+   [
+    5.588,
+    26.523,
+    28.372,
+    29.439,
+    31.094
+   ],
+   [
+    6.084,
+    26.446,
+    28.372,
+    29.605,
+    31.363
+   ],
+   [
+    6.096,
+    26.445,
+    28.372,
+    29.609,
+    null
+   ],
+   [
+    6.604,
+    26.374,
+    28.372,
+    29.779,
+    null
+   ],
+   [
+    6.613,
+    26.373,
+    28.372,
+    29.782,
+    null
+   ],
+   [
+    6.832,
+    26.344,
+    28.372,
+    null,
+    null
+   ],
+   [
+    6.96,
+    null,
+    28.372,
+    null,
+    null
+   ]
+  ],
+  "reading_notes": "Y3 a X=3.048 stampato 29.708: refuso, la sequenza (28.613, ?, 28.820) impone 28.708. Y4 termina a X=6.258, R=31.458 (quota nel disegno)."
+ },
+ "figure1_scale": {
+  "src": "CR-169301 Fig.1 p.7, digitalizzata a 200 dpi",
+  "method": "scala uniforme 33.5 px/cm = media di due ancoraggi: lunghezza dello splitter del prediffusore (5.28 cm, Fig.90 → 32.2 px/cm) e altezza del condotto al bordo d'attacco HPT (5.60 cm, CR-167955 Fig.3 → 34.8 px/cm). Incertezza stimata ±0.5 cm.",
+  "hpt_vane_LE_Z_cm": 213.1,
+  "note": "sostituisce la stima di 217.2 cm misurata su CR-168219 Fig.22"
+ },
+ "geometry": {
+  "outer_liner": [
+   [
+    198.03,
+    37.76
+   ],
+   [
+    200.41,
+    37.97
+   ],
+   [
+    205.79,
+    37.85
+   ],
+   [
+    211.76,
+    37.67
+   ],
+   [
+    212.95,
+    37.61
+   ]
+  ],
+  "inner_liner": [
+   [
+    199.82,
+    24.33
+   ],
+   [
+    205.19,
+    25.01
+   ],
+   [
+    208.77,
+    28.3
+   ],
+   [
+    212.06,
+    31.64
+   ],
+   [
+    212.95,
+    31.73
+   ]
+  ],
+  "centerbody": [
+   [
+    196.83,
+    31.19
+   ],
+   [
+    201.61,
+    31.34
+   ],
+   [
+    206.38,
+    31.1
+   ],
+   [
+    201.61,
+    30.45
+   ],
+   [
+    196.83,
+    30.3
+   ]
+  ],
+  "pilot_dome_face": [
+   [
+    198.92,
+    37.01
+   ],
+   [
+    198.92,
+    32.54
+   ]
+  ],
+  "main_dome_face": [
+   [
+    200.41,
+    28.95
+   ],
+   [
+    200.41,
+    25.67
+   ]
+  ],
+  "outer_casing": [
+   [
+    193.85,
+    40.45
+   ],
+   [
+    202.8,
+    40.6
+   ],
+   [
+    216.23,
+    40.89
+   ]
+  ],
+  "inner_casing": [
+   [
+    187.28,
+    26.72
+   ],
+   [
+    193.85,
+    23.28
+   ],
+   [
+    199.82,
+    22.24
+   ],
+   [
+    208.77,
+    23.28
+   ],
+   [
+    212.06,
+    25.67
+   ],
+   [
+    213.1,
+    28.06
+   ]
+  ],
+  "swirler_rings": {
+   "pilot": {
+    "R": 34.92,
+    "Z": 198.03
+   },
+   "main": {
+    "R": 26.86,
+    "Z": 199.52
+   },
+   "count_each": 30,
+   "src": "CR-168219 p.61 (60 swirl cup, 30 iniettori a doppia punta)"
+  },
+  "fuel_nozzle_stem": [
+   [
+    189.37,
+    46.27
+   ],
+   [
+    195.64,
+    27.31
+   ]
+  ]
+ },
+ "facts": {
+  "swirl_cups": 60,
+  "fuel_nozzles": 30,
+  "support_pins": 30,
+  "liner": "doppia parete: supporto lavorato + 3 file di shingle per zona, raffreddamento a impingement e film (CR-168219 p.61)",
+  "pressure_drop_goal_pct": 5.0,
+  "pattern_factor_max": 0.25,
+  "profile_factor_max": 0.125,
+  "efficiency_min_pct": 99.5,
+  "src_requirements": "CR-169301 Tab.II p.5"
+ }
+}

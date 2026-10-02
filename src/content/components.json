@@ -1,0 +1,131 @@
+{
+ "$comment": "Schede didattiche per gruppo di componenti (pagina Esplora). 'cites' rimanda alle citazioni verificate di story.json; content.test.ts controlla che esistano.",
+ "groups": {
+  "inlet": {
+   "title": "Presa d'aria e gondola",
+   "what": "Il condotto d'ingresso e il rivestimento esterno del motore. Nell'E³ la gondola è in gran parte integrata nella struttura del motore: il cofano del fan fa parte del fan frame.",
+   "function": "Porta l'aria al fan rallentandola (diffusore subsonico) con poche perdite e senza distorsioni, e riduce il rumore irradiato in avanti grazie al trattamento acustico.",
+   "cites": [
+    "fan_cowling",
+    "inlet_table",
+    "highlight",
+    "inlet_acoustic"
+   ]
+  },
+  "fan": {
+   "title": "Fan",
+   "what": "Rotore di {{fan_blades}} pale piene in titanio, con shroud al 55% dell'altezza e velocità periferica corretta di progetto di {{fan_tip}} m/s.",
+   "function": "Comprime tutta l'aria in ingresso: la maggior parte (rapporto di diluizione {{bpr_climb}} a max climb) va nel bypass, quella vicina al mozzo va verso il core.",
+   "cites": [
+    "fan_32",
+    "fan_solid",
+    "tip_speed",
+    "transonic",
+    "cycle_table"
+   ]
+  },
+  "booster": {
+   "title": "Booster (quarter-stage) e isola",
+   "what": "Un piccolo rotore di {{booster_blades}} pale sotto un'isola anulare, seguito dalle {{inner_ogv}} palette di raddrizzamento del flusso diretto al core.",
+   "function": "Sovralimenta il flusso diretto al core e separa i detriti, che vengono centrifugati nel bypass invece di entrare nel compressore.",
+   "cites": [
+    "booster_22",
+    "booster_42",
+    "fod",
+    "inner_ogv"
+   ]
+  },
+  "bypass": {
+   "title": "Palette del bypass e fan frame",
+   "what": "{{ogv_n}} palette di uscita del bypass in composito di grafite, integrate nel telaio strutturale anteriore. Sono di cinque tipi diversi.",
+   "function": "Tolgono al flusso del bypass la rotazione impressa dal fan e reggono strutturalmente il motore. La distanza dal fan e i cinque tipi di palette riducono rispettivamente il rumore e la distorsione dovuta al pilone.",
+   "cites": [
+    "ogv_frame",
+    "ogv_composite",
+    "ogv_types"
+   ]
+  },
+  "hpc": {
+   "title": "Compressore di alta pressione",
+   "what": "{{hpc_stages}} stadi con rapporto di compressione 23. IGV e statori 1–4 sono variabili; i primi quattro rotori sono transonici.",
+   "function": "Porta l'aria del core alla pressione richiesta dal combustore. Le palette variabili mantengono il margine di stallo ai bassi regimi, e la cassa raffreddata stringe i giochi all'apice.",
+   "cites": [
+    "hpc_23",
+    "hpc_highest",
+    "hpc_vsv",
+    "hpc_stall",
+    "hpc_transonic",
+    "hpc_acc"
+   ]
+  },
+  "combustor": {
+   "title": "Combustore anulare a doppio anello",
+   "what": "Due zone di combustione sovrapposte (pilota esterna e main interna), 60 swirler, 30 iniettori a doppia punta e liner a doppia parete con shingle.",
+   "function": "Brucia il combustibile per portare il gas alla temperatura d'ingresso turbina. La combustione a stadi (prima solo la zona pilota, poi entrambe) mantiene basse le emissioni in un ampio campo di potenza.",
+   "cites": [
+    "double_annular",
+    "pilot_only",
+    "main_rich",
+    "swirl_60",
+    "liners",
+    "prediffuser_48",
+    "wide_range"
+   ]
+  },
+  "hpt": {
+   "title": "Turbina di alta pressione",
+   "what": "Due stadi raffreddati; il primo fornisce il 56,5% del lavoro. Shroud ceramico al primo stadio e controllo attivo dei giochi.",
+   "function": "Estrae dal gas caldo il lavoro che muove il compressore HP. Il raffreddamento a impingement, convezione e film permette ai materiali di resistere a temperature del gas superiori alla loro.",
+   "cites": [
+    "two_stage",
+    "work_565",
+    "vane1_film",
+    "blade1_film",
+    "vane2",
+    "blade2",
+    "ceramic_shroud",
+    "hpt_acc"
+   ]
+  },
+  "lpt": {
+   "title": "Turbina di bassa pressione",
+   "what": "Cinque stadi non raffreddati, con parete esterna inclinata di 25°. Il quarto rotore ha {{lpt_r4}} pale per ragioni acustiche.",
+   "function": "Estrae il lavoro che muove il fan e il booster tramite l'albero LP.",
+   "cites": [
+    "lpt_5",
+    "lpt_duct",
+    "lpt_acoustic",
+    "lpt_noise",
+    "lpt_uncooled"
+   ]
+  },
+  "shafts": {
+   "title": "Alberi, dischi e cuscinetti",
+   "what": "Due alberi coassiali co-rotanti su cinque cuscinetti in due sump. Il cuscinetto n. 4 è interalbero. Le geometrie di dischi e alberi nel modello sono stimate.",
+   "function": "Trasmettono la potenza dalle turbine al fan e al compressore e portano i carichi dei rotori ai telai, controllando le vibrazioni.",
+   "cites": [
+    "corotating",
+    "frames",
+    "bearings",
+    "hp_bearings",
+    "intershaft",
+    "squeeze_film",
+    "no4"
+   ]
+  },
+  "exhaust": {
+   "title": "Telaio posteriore, mixer e ugello",
+   "what": "Telaio con 12 montanti radiali e cassa poligonale, mixer a 18 lobi, ugello convergente-divergente unico e tubo di sfiato centrale.",
+   "function": "Il telaio regge il cuscinetto n. 5 e toglie la rotazione residua al gas. Il mixer mescola core e bypass per aumentare il rendimento propulsivo, e l'ugello accelera il getto miscelato.",
+   "cites": [
+    "frame_supports",
+    "frame_struts",
+    "frame_swirl",
+    "mixer_18",
+    "nozzle_cd",
+    "features",
+    "vent_tube"
+   ]
+  }
+ }
+}

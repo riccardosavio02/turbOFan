@@ -1,0 +1,627 @@
+{
+ "$comment": "Specifica del NASA/GE Energy Efficient Engine (E3), configurazione Flight Propulsion System (FPS). Ogni valore numerico ha la forma {v, unit, src}. src = '<report> p.<pagina report> <tabella|figura|testo>' oppure 'derived:<formula>' oppure 'estimate:<metodo>'. Pagina PDF = pagina report + 14 per CR-168219.",
+ "id": "ge-e3-fps",
+ "name": "NASA/GE Energy Efficient Engine (E3) - Flight Propulsion System",
+ "status": "fase 0 - CR-168219 estratto; fan in ge-e3.fan.json (CR-165148, CR-168070); HPC in ge-e3.hpc.json (CR-165558); combustore/turbine da estrarre",
+ "architecture": {
+  "type": "turbofan bialbero, flussi misti, ad alto rapporto di diluizione",
+  "spools": [
+   {
+    "id": "LP",
+    "drives": [
+     "fan",
+     "booster"
+    ],
+    "driven_by": "lpt"
+   },
+   {
+    "id": "HP",
+    "drives": [
+     "hpc"
+    ],
+    "driven_by": "hpt"
+   }
+  ],
+  "spool_rotation": {
+   "v": "co-rotating",
+   "src": "CR-168219 p.10 testo ('Both shafts rotate in the same direction')"
+  },
+  "bearings": {
+   "v": 5,
+   "src": "CR-168219 p.10, p.96 testo",
+   "note": "LP: 1 ball + 2 roller; HP: thrust bearing anteriore + roller intershaft (No.4) posteriore; No.5 su turbine frame. 2 sump."
+  },
+  "frames": {
+   "v": 2,
+   "src": "CR-168219 p.10 testo",
+   "note": "fan frame composito anteriore (integrale con OGV), turbine rear frame dietro la LPT"
+  },
+  "exhaust": "long-duct, mixer a 18 lobi, ugello unico C-D a basso rapporto d'area"
+ },
+ "overall": {
+  "fan_tip_diameter": {
+   "v": 2.11,
+   "unit": "m",
+   "src": "CR-168219 p.32 testo, p.139 testo"
+  },
+  "thrust_takeoff_final": {
+   "v": 173.5,
+   "unit": "kN",
+   "src": "CR-168219 p.32 testo (39,000 lbf)",
+   "note": "p.139 riporta 175.3 kN: refuso, 39,000 lbf = 173.5 kN"
+  },
+  "thrust_takeoff_original": {
+   "v": 162.4,
+   "unit": "kN",
+   "src": "CR-168219 p.32 testo (36,500 lbf)"
+  },
+  "core_corrected_flow_max_climb": {
+   "v": 54.4,
+   "unit": "kg/s",
+   "src": "CR-168219 p.32 testo; p.51 Tab.XIV"
+  },
+  "weight_basic_engine": {
+   "v": 3473,
+   "unit": "kg",
+   "src": "CR-168219 p.140 Tab.XXVI"
+  },
+  "weight_installed": {
+   "v": 4465,
+   "unit": "kg",
+   "src": "CR-168219 p.140 Tab.XXVI"
+  }
+ },
+ "rating_points": {
+  "$comment": "Tutti i punti: aria secca, zero bleed e zero estrazione di potenza, recupero di pressione all'ingresso 100%. CR-168219 p.33. T41 della Tab.XII vale alla temperatura di flat rating (flat_rating_dT_K); sfc e, per coerenza, gli altri parametri valgono in giornata standard (p.33). Verificato col modello fuori progetto: docs/cycle-model.md.",
+  "max_climb": {
+   "mach": 0.8,
+   "alt_m": 10670,
+   "dT_isa_K": 10,
+   "role": "cycle match point / aero design point dei componenti",
+   "flat_rating_dT_K": 10
+  },
+  "max_cruise": {
+   "mach": 0.8,
+   "alt_m": 10670,
+   "dT_isa_K": 0,
+   "role": "punto di valutazione sfc",
+   "flat_rating_dT_K": 10
+  },
+  "takeoff": {
+   "mach": 0.0,
+   "alt_m": 0,
+   "dT_isa_K": 0,
+   "role": "flat-rating SLS",
+   "flat_rating_dT_K": 15
+  }
+ },
+ "cycle": {
+  "$comment": "CR-168219 p.35 Tab.XII (verificata su immagine)",
+  "sfc_uninstalled": {
+   "max_climb": 0.0541,
+   "max_cruise": 0.054,
+   "takeoff": 0.0305,
+   "unit": "kg/(N h)",
+   "src": "CR-168219 p.35 Tab.XII"
+  },
+  "OPR": {
+   "max_climb": 38.4,
+   "max_cruise": 36.5,
+   "takeoff": 32.4,
+   "src": "CR-168219 p.35 Tab.XII"
+  },
+  "BPR": {
+   "max_climb": 6.7,
+   "max_cruise": 6.8,
+   "takeoff": 7.0,
+   "src": "CR-168219 p.35 Tab.XII"
+  },
+  "fan_bypass_PR": {
+   "max_climb": 1.68,
+   "max_cruise": 1.64,
+   "takeoff": 1.56,
+   "src": "CR-168219 p.35 Tab.XII"
+  },
+  "fan_hub_PR": {
+   "max_climb": 1.7,
+   "max_cruise": 1.66,
+   "takeoff": 1.58,
+   "src": "CR-168219 p.35 Tab.XII"
+  },
+  "HPC_PR": {
+   "max_climb": 23.1,
+   "max_cruise": 22.4,
+   "takeoff": 20.8,
+   "src": "CR-168219 p.35 Tab.XII",
+   "note": "Tab.XIV (p.51) riporta 23.0 a max climb"
+  },
+  "T41_HPT_rotor_inlet": {
+   "max_climb": 1517,
+   "max_cruise": 1485,
+   "takeoff": 1638,
+   "unit": "K",
+   "src": "CR-168219 p.35 Tab.XII (1244/1212/1365 degC) e p.70 Tab.XVIII (1517 K)",
+   "note": "alla temperatura di flat rating"
+  },
+  "sfc_max_cruise_installed": {
+   "v": 0.0559,
+   "unit": "kg/(N h)",
+   "src": "CR-168219 p.9 Tab.III"
+  }
+ },
+ "component_performance_max_cruise": {
+  "$comment": "CR-168219 p.34 Tab.XI (verificata su immagine). Valori FPS finali.",
+  "eta_fan_bypass": 0.894,
+  "eta_fan_hub_booster": 0.906,
+  "eta_hpc_adiabatic": 0.861,
+  "eta_combustor": 0.999,
+  "dp_combustor": 0.05,
+  "eta_hpt": 0.927,
+  "eta_lpt": 0.925,
+  "dp_fan_duct": 0.014,
+  "dp_core_duct": 0.017,
+  "dp_nozzle_duct": 0.0021,
+  "mixer_effectiveness": 0.838,
+  "nozzle_coefficient": 0.996,
+  "cooling_nonchargeable_pctW25": 7.46,
+  "cooling_chargeable_pctW25": 5.33,
+  "bleed_7th_stage_pctW25": 1.95,
+  "bleed_5th_stage_pctW25": 1.4,
+  "src": "CR-168219 p.34 Tab.XI",
+  "note": "mixer_effectiveness: Tab.XXIII (p.104) riporta 85% come proiezione FPS; Tab.XI 83.8%. Si usa Tab.XI (definizione del ciclo)."
+ },
+ "speeds": {
+  "N_HP_max_climb": {
+   "v": 12450,
+   "unit": "rpm",
+   "src": "derived: Tab.XVIII N/sqrt(T)=33.47 rad/s/sqrt(K) x sqrt(1517 K); controllo in unità imperiali 238.3 x sqrt(2730 R) = 12451 rpm"
+  },
+  "N_LP_max_climb": {
+   "v": 3479,
+   "unit": "rpm",
+   "src": "derived: Tab.XXI N/sqrt(T)=11.21 x sqrt(1056.3 K); controllo imperiale 79.79 x sqrt(1901.4 R) = 3479 rpm"
+  },
+  "ICLS_test_points": {
+   "v": "3200 rpm NF / 12420 rpm NC; 2600 rpm NF / 11900 rpm NC",
+   "src": "CR-168219 p.137 testo (rotordinamica ICLS)"
+  }
+ },
+ "modules": [
+  {
+   "id": "fan",
+   "type": "fan_rotor",
+   "spool": "LP",
+   "stages": 1,
+   "rotor_blades": {
+    "v": 32,
+    "src": "CR-168219 p.38 Fig.13; p.45 testo"
+   },
+   "material": "titanio, pale piene",
+   "part_span_shroud": {
+    "v": 0.55,
+    "unit": "frazione di altezza sull'asse di impilamento",
+    "src": "CR-165148 p.3 testo",
+    "note": "CR-168219 p.45 arrotonda a 50%"
+   },
+   "inlet_radius_ratio": {
+    "v": 0.342,
+    "src": "CR-168219 p.41 testo"
+   },
+   "specific_flow": {
+    "v": 208.9,
+    "unit": "kg/(s m2)",
+    "src": "CR-168219 p.41 testo"
+   },
+   "corrected_tip_speed_design": {
+    "v": 411.5,
+    "unit": "m/s",
+    "src": "CR-168219 p.41 testo"
+   },
+   "corrected_flow": {
+    "aero_design": 643.3,
+    "cycle_match": 646.0,
+    "unit": "kg/s",
+    "src": "CR-168219 p.41 testo"
+   },
+   "PR_bypass": {
+    "aero_design": 1.65,
+    "cycle_match": 1.68,
+    "src": "CR-168219 p.41 testo"
+   },
+   "PR_core": {
+    "aero_design": 1.67,
+    "cycle_match": 1.7,
+    "src": "CR-168219 p.41 testo"
+   },
+   "relative_tip_mach": {
+    "v": 1.4,
+    "src": "CR-168219 p.43 testo"
+   },
+   "blade_section_streamsurfaces": {
+    "v": 12,
+    "src": "CR-168219 p.43 testo"
+   }
+  },
+  {
+   "id": "booster",
+   "type": "quarter_stage",
+   "spool": "LP",
+   "description": "quarter-stage sotto un'isola (splitter) non intrappolata; ~22% della portata totale passa dal booster rotor, poi il 42% di questa rientra nel bypass",
+   "flow_fraction_through_booster": {
+    "v": 0.22,
+    "src": "CR-168219 p.41 testo"
+   },
+   "booster_flow_returned_to_bypass": {
+    "v": 0.42,
+    "src": "CR-168219 p.41 testo"
+   },
+   "stator1_vanes": {
+    "v": 60,
+    "src": "CR-165148 p.135 App.C"
+   },
+   "rotor_blades": {
+    "v": 56,
+    "src": "CR-165148 p.136 App.D"
+   }
+  },
+  {
+   "id": "inner_ogv",
+   "type": "stator",
+   "spool": null,
+   "vanes": {
+    "v": 64,
+    "src": "CR-168219 p.38 Fig.13; p.43 testo"
+   },
+   "sweep_aft": {
+    "v": 60,
+    "unit": "deg",
+    "src": "CR-168219 p.43 testo"
+   },
+   "lean": {
+    "v": "0 deg all'OD, 20 deg all'ID",
+    "src": "CR-168219 p.43 testo"
+   }
+  },
+  {
+   "id": "fan_ogv",
+   "type": "stator_frame",
+   "spool": null,
+   "vanes": {
+    "v": 34,
+    "src": "CR-168219 p.38 Fig.13",
+    "note": "OGV integrali con il fan frame composito"
+   },
+   "axial_spacing_from_fan": {
+    "v": 1.9,
+    "unit": "corde del fan",
+    "src": "CR-168219 p.37 testo (scelta acustica)"
+   },
+   "material": "composito di grafite, hub in alluminio"
+  },
+  {
+   "id": "hpc",
+   "type": "axial_compressor",
+   "spool": "HP",
+   "stages": 10,
+   "variable_rows": {
+    "v": "IGV + statori 1-4",
+    "src": "CR-168219 p.45 testo"
+   },
+   "transonic_rotors": {
+    "v": "rotori 1-4",
+    "src": "CR-168219 p.52 testo"
+   },
+   "PR": {
+    "v": 23.0,
+    "src": "CR-168219 p.51 Tab.XIV (max climb)"
+   },
+   "corrected_tip_speed_design": {
+    "v": 456,
+    "unit": "m/s",
+    "src": "CR-168219 p.48 testo"
+   },
+   "corrected_speed_pct_at_match": {
+    "v": 98.4,
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "corrected_flow": {
+    "v": 54.4,
+    "unit": "kg/s",
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "eta_adiabatic": {
+    "v": 0.86,
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "eta_polytropic": {
+    "v": 0.906,
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "T25": {
+    "v": 304.8,
+    "unit": "K",
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "P25": {
+    "v": 60469,
+    "unit": "Pa",
+    "src": "CR-168219 p.51 Tab.XIV"
+   },
+   "inlet_tip_diameter": {
+    "v": 0.708,
+    "unit": "m",
+    "src": "estimate: U_tip,c=456 m/s a N_c 100% = 12301 rpm (da N_HP derivato e T25)",
+    "note": "CR-165558 Tab.XXI: 0.7014 m (scarto 0.9%); geometria completa in ge-e3.hpc.json"
+   },
+   "bleed_ports": "stator 5 exit (bleed cliente + ACC compressore → raffreddamento LPT); stage 7 exit (raffreddamento HPT stadio 2)",
+   "materials": "pale rotore 1-5 Ti, 6-10 Inco 718; tamburo anteriore e disco 6 Ti; tamburo posteriore René 95 (polveri); IGV e statori 1-4 A286, statori 5-9 Inco 718; cassa M152",
+   "outlet": "diffusore fuso a doppio passaggio (split) con montanti cavi"
+  },
+  {
+   "id": "combustor",
+   "type": "double_annular",
+   "swirl_cups": {
+    "v": 60,
+    "src": "CR-168219 p.61 testo"
+   },
+   "fuel_nozzles": {
+    "v": 30,
+    "src": "CR-168219 p.61 testo",
+    "note": "a doppia punta, una per anello"
+   },
+   "support_pins": {
+    "v": 30,
+    "src": "CR-168219 p.61 testo"
+   },
+   "zones": "pilota esterno (sempre acceso) + main interno (alta potenza)",
+   "prediffuser_split": {
+    "outer_pilot": 0.48,
+    "inner_main": 0.52,
+    "src": "CR-168219 p.57 testo"
+   },
+   "liner": "doppia parete, 3 file assiali di shingle per zona, impingement + film; TBC su dome e shingle",
+   "materials": "cassa Inco 718; diffusore Inco 718; dome Hastelloy X; shingle X-40"
+  },
+  {
+   "id": "hpt",
+   "type": "axial_turbine",
+   "spool": "HP",
+   "stages": 2,
+   "cooled": true,
+   "T41": {
+    "v": 1517,
+    "unit": "K",
+    "src": "CR-168219 p.70 Tab.XVIII"
+   },
+   "dh_over_T": {
+    "v": 355.5,
+    "unit": "J/(kg K)",
+    "src": "CR-168219 p.70 Tab.XVIII"
+   },
+   "N_over_sqrtT": {
+    "v": 33.47,
+    "unit": "rad/s/sqrt(K)",
+    "src": "CR-168219 p.70 Tab.XVIII"
+   },
+   "corrected_flow_WsqrtT_P": {
+    "v": 0.8643,
+    "unit": "g sqrt(K)/(s Pa)",
+    "src": "CR-168219 p.70 Tab.XVIII"
+   },
+   "stage1_work_fraction": {
+    "v": 0.565,
+    "src": "CR-168219 p.71 testo"
+   },
+   "tip_clearance_takeoff": {
+    "v": 0.64,
+    "unit": "mm",
+    "src": "CR-168219 p.76 testo",
+    "note": "il testo dice '0.64 cm (0.025 in.)': 0.025 in = 0.64 mm, refuso sull'unità"
+   },
+   "materials": "S1 vane MA754 ODS + TBC; S1 blade N4 + TBC; S2 vane N4 + TBC; S2 blade DS eutectic non raffreddata; S1 shroud ceramico ZrO; dischi René 95"
+  },
+  {
+   "id": "lpt",
+   "type": "axial_turbine",
+   "spool": "LP",
+   "stages": 5,
+   "cooled": false,
+   "T49": {
+    "v": 1056.3,
+    "unit": "K",
+    "src": "CR-168219 p.86 Tab.XXI"
+   },
+   "dh_over_T": {
+    "v": 326.5,
+    "unit": "J/(kg K)",
+    "src": "CR-168219 p.86 Tab.XXI"
+   },
+   "N_over_sqrtT": {
+    "v": 11.21,
+    "unit": "rad/s/sqrt(K)",
+    "src": "CR-168219 p.86 Tab.XXI"
+   },
+   "corrected_flow_WsqrtT_P": {
+    "v": 3.936,
+    "unit": "g sqrt(K)/(s Pa)",
+    "src": "CR-168219 p.86 Tab.XXI"
+   },
+   "outer_wall_slope": {
+    "v": 25,
+    "unit": "deg",
+    "src": "CR-168219 p.82 testo"
+   },
+   "transition_duct_length": {
+    "v": 76.2,
+    "unit": "mm",
+    "src": "CR-168219 p.82 testo"
+   },
+   "stage4_vane_blade_gap": {
+    "v": 1.4,
+    "unit": "corde pala",
+    "src": "CR-168219 p.85 testo (cutoff acustico)"
+   },
+   "stage4_blades": {
+    "v": 156,
+    "src": "LPT detailed design report, abstract NTRS",
+    "note": "da confermare nel report LPT"
+   },
+   "nozzle_segments": "stadio 1: segmenti da 4 palette; stadi 2-5: segmenti da 6 palette",
+   "blades": "tip-shrouded, fuse, attacco a coda di rondine multi-dente",
+   "materials": "pale René 125; palette S1 René 77; dischi Inco 718; cassa Inco 718"
+  },
+  {
+   "id": "turbine_frame",
+   "type": "frame",
+   "struts": {
+    "v": 12,
+    "src": "CR-168219 p.90 testo",
+    "note": "radiali, curvati per togliere lo swirl residuo"
+   },
+   "outer_casing": "poligonale a spessore variabile",
+   "material": "Inco 718"
+  },
+  {
+   "id": "mixer",
+   "type": "lobed_mixer",
+   "lobes": {
+    "v": 18,
+    "src": "CR-168219 p.102 testo; p.103 Fig.39"
+   },
+   "pressure_loss": {
+    "v": 0.0057,
+    "src": "CR-168219 p.104 Tab.XXIII"
+   },
+   "sfc_benefit_pct": {
+    "v": 2.9,
+    "src": "CR-168219 p.104 Tab.XXIII"
+   },
+   "materials": "mixer Inco 718; centerbody Inco 625"
+  },
+  {
+   "id": "nozzle",
+   "type": "mixed_CD_low_area_ratio",
+   "fan_duct_mach": {
+    "v": "0.40-0.45",
+    "src": "CR-168219 p.101 testo"
+   },
+   "center_vent_tube": true
+  }
+ ],
+ "weights_kg": {
+  "$comment": "CR-168219 p.140 Tab.XXVI (verificata su immagine; somme controllate)",
+  "fan_booster": {
+   "rotor": 481,
+   "frame_stators": 622,
+   "subtotal": 1103
+  },
+  "lpt": {
+   "rotor": 260,
+   "stator": 257,
+   "frame_mixer_centerbody": 221,
+   "shaft_cone": 99,
+   "subtotal": 837
+  },
+  "core": {
+   "hpc_rotor": 214,
+   "hpc_stator": 235,
+   "combustor_casing_diffuser": 137,
+   "hpt_rotor": 283,
+   "hpt_stator": 132,
+   "subtotal": 1001
+  },
+  "misc": {
+   "configurations": 123,
+   "lube": 24,
+   "controls_accessories": 65,
+   "sumps_drives_seals": 320,
+   "subtotal": 532
+  },
+  "basic_engine": 3473,
+  "installation": {
+   "inlet": 162,
+   "reverser": 379,
+   "cowl_pylon_exhaust": 181,
+   "engine_buildup": 270,
+   "subtotal": 992
+  },
+  "installed_engine": 4465
+ },
+ "geometry_sources_todo": {
+  "$comment": "Sezioni presenti in CR-168219 senza quote o numero di pale (tranne Fig.13): servono come guida visiva. Coordinate del condotto e dati di schiera vanno presi dai report di componente.",
+  "figures_CR168219": {
+   "Fig.1 motore completo + nacelle": "p.4 (PDF 18)",
+   "Fig.13 fan": "p.38 (PDF 52) - con numero di pale",
+   "Fig.18 HPC": "p.47 (PDF 61)",
+   "Fig.22 combustore": "p.59 (PDF 73)",
+   "Fig.24 HPT": "p.66 (PDF 80)",
+   "Fig.32 LPT": "p.83 (PDF 97)",
+   "Fig.35 turbine frame": "p.93 (PDF 107)",
+   "Fig.39 mixer": "p.103 (PDF 117)",
+   "Fig.40 nacelle": "p.106 (PDF 120)"
+  },
+  "next_reports": [
+   "CR-165148 fan",
+   "CR-165558 HPC",
+   "CR-167955 HPT",
+   "LPT detailed design",
+   "CR-169301 combustor"
+  ]
+ },
+ "core_test_CR168069": {
+  "$comment": "NASA CR-168069 (Stearns et al., GE, dic. 1982), prova del core (HPC + combustore + HPT), < 45 h, 1400 sensori. p.1-2 Sommario.",
+  "hpc_efficiency_max_cruise_adjusted": {
+   "v": 0.856,
+   "goal": 0.851,
+   "src": "CR-168069 p.1"
+  },
+  "diffuser_combustor_dp_high_power_pct": {
+   "v": 5.4,
+   "goal": 5.0,
+   "src": "CR-168069 p.2",
+   "note": "maggiore per la funzione di portata più alta del core; rientra con quella FPS"
+  },
+  "combustor_efficiency": {
+   "v": 0.999,
+   "goal": 0.996,
+   "src": "CR-168069 p.2"
+  },
+  "hpt_efficiency_FPS_clearances": {
+   "v": 0.923,
+   "src": "CR-168069 p.2",
+   "note": "+0.6 punti sopra l'obiettivo riportato al punto di progetto"
+  },
+  "start_time_s": {
+   "v": 47,
+   "fuel_on_to_idle_s": 29,
+   "src": "CR-168069 p.2"
+  },
+  "stations_SAE": {
+   "src": "CR-168069 p.xxvi Fig.1",
+   "list": {
+    "0": "ambiente",
+    "1": "imbocco presa d'aria",
+    "12": "fan, apice",
+    "2": "fan, mozzo",
+    "13": "uscita OGV apice",
+    "14": "ingresso condotto bypass",
+    "16": "piano di miscelamento bypass",
+    "23": "uscita fan mozzo verso il core",
+    "25": "ingresso compressore",
+    "27": "spillamento 5° stadio",
+    "3": "uscita compressore",
+    "36": "ingresso combustore",
+    "4": "ingresso distributore 1 HPT",
+    "41": "uscita distributore 1 HPT",
+    "42": "uscita HPT",
+    "49": "ingresso distributore 1 LPT",
+    "5": "uscita LPT",
+    "55": "uscita condotto core",
+    "56": "piano di miscelamento core",
+    "7": "ingresso ugello",
+    "8": "gola ugello",
+    "9": "uscita ugello"
+   }
+  }
+ }
+}
