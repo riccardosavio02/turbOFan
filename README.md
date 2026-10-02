@@ -55,4 +55,4 @@ src/pages/          pagine Storia ed Esplora
 ```
 
 ## Licenza
-Da definire prima della pubblicazione. I report NASA citati sono documenti governativi statunitensi di pubblico dominio e non sono ridistribuiti in questo repository.
+Il codice è distribuito con licenza [MIT](LICENSE). I report NASA citati sono documenti governativi statunitensi di pubblico dominio e non sono ridistribuiti in questo repository.
